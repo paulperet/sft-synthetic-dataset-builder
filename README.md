@@ -15,6 +15,19 @@ Secondly, let's create two files:
 touch instruction_prompt.txt
 touch subject.txt
 ```
+Example:
+
+instruction_prompt.txt - You want to explain the role and persona of the assistant
+```markdown
+You are a software engineer specialized in C, you will generate a question from a user in plain text
+and only output the resulting C code. You will also provide reasoning steps.
+```
+
+instruction_prompt.txt - You want to have multiple examples so the generated dataset contains a lot of diversity. You can create this list by your own or generate it using a LLM.
+```markdown
+Selection Sort;Bubble Sort;Insertion Sort;Merge Sort;Quick Sort;Heap Sort;Cycle Sort;3-way Merge Sort
+```
+
 The "instruction_prompt.txt" file should contain your custom prompt. Depending on your goal you can ask the AI to only output code for example, to create a text to SQL specialized model,
 but it can also be a description of a custom persona that you want the AI to adopt.
 In subjects.txt you define a list of diverse subjects separated by commas. This is important as it will allow generating a lot of diverse examples which is crucial for LLM fine-tuning.
@@ -32,7 +45,7 @@ The first step is to run the dataset builder, providing the api endpoint (ex: ht
 dataset_builder.py [-h] --api-endpoint API_ENDPOINT [--threads THREADS] [--examples EXAMPLES] --model MODEL
 ```
 
-Then, you should run this script as long as you have invalid examples as it will attempt to apply a template from a tokenizer and find incorrect formats.
+Then, you should run this script as long as you have invalid examples as it will check if the JSON files are correctly structured.
 ```bash
 dataset_repair.py [-h] [--api-endpoint API_ENDPOINT] [--threads THREADS] --model MODEL
 ```
