@@ -9,7 +9,7 @@ import argparse
 def publish_dataset(hf_path: str, private=False):
 
     hf_token = os.environ["HF_TOKEN"]
-    
+
     data_list = []
 
     for file in os.listdir("output"):
@@ -26,7 +26,7 @@ def publish_dataset(hf_path: str, private=False):
 
     # Convert to DataFrame and save as JSONL
     df = pd.DataFrame(data_list)
-    df.to_json("output/dataset.jsonl", orient="records", lines=True)
+    df.to_json("dataset.jsonl", orient="records", lines=True)
 
     # Load into datasets
     from datasets import load_dataset

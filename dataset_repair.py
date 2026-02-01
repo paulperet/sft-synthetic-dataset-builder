@@ -13,7 +13,7 @@ import json
 tokenizer = AutoTokenizer.from_pretrained("openai/gpt-oss-20b")
 
 def repair_data(api_endpoint: str, threads: int, model: str):
-    API_KEY = os.getenv("DEESEEK_API_KEY")
+    API_KEY = os.getenv("LLM_API_KEY")
 
     client = OpenAI(api_key=API_KEY, base_url=api_endpoint)
 
