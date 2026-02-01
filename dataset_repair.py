@@ -7,10 +7,7 @@ from pathlib import Path
 import os
 import filecmp
 from concurrent.futures import ThreadPoolExecutor
-from transformers import AutoTokenizer
 import json
-
-tokenizer = AutoTokenizer.from_pretrained("openai/gpt-oss-20b")
 
 def repair_data(api_endpoint: str, threads: int, model: str):
     API_KEY = os.getenv("LLM_API_KEY")
@@ -50,14 +47,34 @@ def repair_data(api_endpoint: str, threads: int, model: str):
 
     incorrect_files = []
 
-    for file in os.listdir("output"):
-        if not file.endswith(".json"):
-            continue
-        try:
-            messages = json.loads(open(os.path.join("output", file)).read())[0]["messages"]
-            conversation = tokenizer.apply_chat_template(messages, tokenize=False)
-        except Exception as e:
-            incorrect_files.append(file)
+    def check_json_structure(folder_path):
+        for filename in os.listdir(folder_path):
+            if filename.endswith(".json"):
+                file_path = os.path.join(folder_path, filename)
+                
+                try:
+                    with open(file_path, 'r', encoding='utf-8') as f:
+                        data = json.load(f)
+                    
+                    # Validation checks
+                    is_valid = (
+                        isinstance(data, list) and len(data) == 1 and
+                        "messages" in data[0] and
+                        isinstance(data[0]["messages"], list) and len(data[0]["messages"]) == 2 and
+                        data[0]["messages"][0].get("role") == "user" and
+                        data[0]["messages"][1].get("role") == "assistant" and
+                        "thinking" in data[0]["messages"][1]
+                    )
+
+                    if is_valid:
+                        pass
+                    else:
+                        incorrect_files.append(filename)
+                        
+                except (json.JSONDecodeError, KeyError, IndexError):
+                    incorrect_files.append(filename)
+
+    check_json_structure('./output')
 
     print("Number of incorrect files:", len(incorrect_files))
     if len(incorrect_files) == 0:
