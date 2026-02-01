@@ -27,9 +27,9 @@ export LLM_API_KEY="your_LLM_API_key"
 
 ### Usage
 
-The first step is to run the dataset builder, providing the api endpoint (ex: https://api.deepseek.com), number of threads for concurrent calls and the size of the dataset.
+The first step is to run the dataset builder, providing the api endpoint (ex: https://api.deepseek.com) and model (ex: deepseek-chat), number of threads for concurrent calls and the size of the dataset.
 ```bash
-dataset_builder.py [-h] --api-endpoint API_ENDPOINT [--threads THREADS] [--examples EXAMPLES]
+dataset_builder.py [-h] --api-endpoint API_ENDPOINT [--threads THREADS] [--examples EXAMPLES] --model MODEL
 ```
 
 Then, you should run this script as long as you have invalid examples as it will attempt to apply a template from a tokenizer and find incorrect formats.
