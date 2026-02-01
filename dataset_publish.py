@@ -6,9 +6,10 @@ from datasets import load_dataset
 from pathlib import Path
 import argparse
 
-hf_token = os.environ["HF_TOKEN"]
-
 def publish_dataset(hf_path: str, private=False):
+
+    hf_token = os.environ["HF_TOKEN"]
+    
     data_list = []
 
     for file in os.listdir("output"):

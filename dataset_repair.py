@@ -12,7 +12,7 @@ import json
 
 tokenizer = AutoTokenizer.from_pretrained("openai/gpt-oss-20b")
 
-def repair_data(api_endpoint: str, threads: int):
+def repair_data(api_endpoint: str, threads: int, model: str):
     API_KEY = os.getenv("DEESEEK_API_KEY")
 
     client = OpenAI(api_key=API_KEY, base_url=api_endpoint)
@@ -72,7 +72,7 @@ def repair_data(api_endpoint: str, threads: int):
     def process_query(subject):
         try:
             response = client.chat.completions.create(
-            model="deepseek-chat",
+            model=model,
             messages=[
                 {"role": "system", "content": prompt_instruct},
                 {"role": "user", "content": f"You will base the query on the subject: {subject}"},
@@ -114,6 +114,13 @@ def parse_args():
         help="Number of threads to use for data repair.",
     )
 
+    parser.add_argument(
+        "--model",
+        type=str,
+        required=True,
+        help="Model to use for data repair. example: deepseek-chat",
+    )
+
     args = parser.parse_args()
     return args
 
@@ -123,4 +130,5 @@ if __name__ == "__main__":
     repair_data(
         api_endpoint=args.api_endpoint,
         threads=args.threads,
+        model=args.model,
     )

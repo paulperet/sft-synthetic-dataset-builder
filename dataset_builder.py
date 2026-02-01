@@ -78,7 +78,7 @@ def parse_args():
     parser.add_argument(
         "--api-endpoint",
         type=str,
-        default="https://api.deepseek.com",
+        required=True,
         help="Path to your favorite API endpoint.",
     )
 
