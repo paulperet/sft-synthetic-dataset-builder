@@ -8,7 +8,7 @@ import os
 import filecmp
 from concurrent.futures import ThreadPoolExecutor
 
-def collect_data(api_endpoint: str, threads: int, examples: int):
+def collect_data(api_endpoint: str, threads: int, examples: int, model: str):
     API_KEY = os.getenv("LLM_API_KEY")
 
     client = OpenAI(api_key=API_KEY, base_url=api_endpoint)
@@ -47,7 +47,7 @@ def collect_data(api_endpoint: str, threads: int, examples: int):
     def process_query(subject):
         try:
             response = client.chat.completions.create(
-            model="deepseek-chat",
+            model=model,
             messages=[
                 {"role": "system", "content": prompt_instruct},
                 {"role": "user", "content": f"You will base the query on the subject: {subject}"},
@@ -96,6 +96,13 @@ def parse_args():
         help="Number of examples to use for data collection.",
     )
 
+    parser.add_argument(
+        "--model",
+        type=str,
+        required=True,
+        help="Model to use for data collection. example: deepseek-chat",
+    )
+
     args = parser.parse_args()
     return args
 
@@ -106,4 +113,5 @@ if __name__ == "__main__":
         api_endpoint=args.api_endpoint,
         threads=args.threads,
         examples=args.examples,
+        model=args.model,
     )
