@@ -22,7 +22,7 @@ In subjects.txt you define a list of diverse subjects separated by commas. This 
 Thirdly export your API keys that will be used to generate the dataset and publish it on HuggingFace:
 ```bash
 export HF_TOKEN="your_huggingface_token"
-export LLM_API_KEY="your LLM API key"
+export LLM_API_KEY="your_LLM_API_key"
 ```
 
 ### Usage
