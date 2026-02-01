@@ -13,7 +13,7 @@ pip install -r requirements
 Secondly, let's create two files:
 ```bash
 touch instruction_prompt.txt
-touch subject.txt
+touch subjects.txt
 ```
 Example:
 
@@ -23,7 +23,7 @@ You are a software engineer specialized in C, you will generate a question from 
 and only output the resulting C code. You will also provide reasoning steps.
 ```
 
-instruction_prompt.txt - You want to have multiple examples so the generated dataset contains a lot of diversity. You can create this list by your own or generate it using a LLM.
+subjects.txt - You want to have multiple examples so the generated dataset contains a lot of diversity. You can create this list by your own or generate it using a LLM.
 ```markdown
 Selection Sort;Bubble Sort;Insertion Sort;Merge Sort;Quick Sort;Heap Sort;Cycle Sort;3-way Merge Sort
 ```
