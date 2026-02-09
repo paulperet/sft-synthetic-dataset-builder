@@ -1,9 +1,11 @@
 .venv
 subjects.txt
 instruction_prompt.txt
+system_prompt.txt
 __pycache__/
-output/
+examples/
+questions/
 *.pyc
 .DS_Store
-output/*
+examples/*
 dataset.jsonl

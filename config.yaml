@@ -2,3 +2,4 @@ api-endpoint: https://api.example.com/v1
 model: model-name
 threads: 50
 examples: 100
+thinking: true

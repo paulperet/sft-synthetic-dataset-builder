@@ -9,12 +9,14 @@ import yaml
 def generate_questions():
     API_KEY = os.getenv("LLM_API_KEY")
 
-    with open('data.yaml', 'r') as file:
+    Path("questions").mkdir(parents=True, exist_ok=True)
+
+    with open('config.yaml', 'r') as file:
         loaded_data = yaml.safe_load(file)
-        api_endpoint = loaded_data.get('api-endpoint', api_endpoint)
-        model = loaded_data.get('model', model)
-        threads = loaded_data.get('threads', threads)
-        examples = loaded_data.get('examples', examples)
+        api_endpoint = loaded_data.get('api-endpoint')
+        model = loaded_data.get('model')
+        threads = loaded_data.get('threads')
+        examples = loaded_data.get('examples')
 
     client = OpenAI(api_key=API_KEY, base_url=api_endpoint)
 
@@ -30,13 +32,13 @@ def generate_questions():
     def process_query(subject):
         try:
             response = client.chat.completions.create(
-            model=model,
-            messages=[
-                {"role": "system", "content": custom_instruction},
-                {"role": "user", "content": f"You will base the query on the subject: {subject}"},
-            ],
-            stream=False
-                    )
+                model=model,
+                messages=[
+                    {"role": "system", "content": custom_instruction},
+                    {"role": "user", "content": f"You will base the query on the subject: {subject}"},
+                ],
+                stream=False
+            )
 
             with open(os.path.join(folder, subject+".txt"), "w") as f:
                 output = response.choices[0].message.content

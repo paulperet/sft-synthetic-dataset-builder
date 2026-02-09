@@ -12,11 +12,11 @@ def publish_dataset(hf_path: str, private=False):
 
     data_list = []
 
-    for file in os.listdir("output"):
+    for file in os.listdir("examples"):
         if not file.endswith(".json"):
             continue
         try:
-            with open(os.path.join("output", file), 'r') as f:
+            with open(os.path.join("examples", file), 'r') as f:
                 content = json.load(f)
                 # Assuming the structure is a list of dicts, and you want the first one
                 messages = content[0]["messages"]
