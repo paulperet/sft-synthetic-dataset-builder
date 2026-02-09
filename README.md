@@ -17,10 +17,14 @@ touch subjects.txt
 ```
 Example:
 
-instruction_prompt.txt - You want to explain the role and persona of the assistant
+instruction_prompt.txt - You want to explain what questions to generate
 ```markdown
-You are a software engineer specialized in C, you will generate a question from a user in plain text
-and only output the resulting C code. You will also provide reasoning steps.
+You are a software engineer specialized in C, you will generate a question from a user about a provided subject.
+```
+
+system_prompt.txt - You want to explain the role and persona of the assistant
+```markdown
+You are a software engineer specialized in C, you will respond to the user query. You will only output the C code.
 ```
 
 subjects.txt - You want to have multiple examples so the generated dataset contains a lot of diversity. You can create this list by your own or generate it using a LLM.
