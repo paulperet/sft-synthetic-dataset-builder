@@ -38,11 +38,21 @@ export HF_TOKEN="your_huggingface_token"
 export LLM_API_KEY="your_LLM_API_key"
 ```
 
+config.yaml :
+```yaml
+api-endpoint: https://api.example.com/v1
+model: model-name
+threads: 50
+examples: 100
+thinking: true
+```
+
 ### Usage
 
 The first step is to run the dataset builder, providing the api endpoint (ex: https://api.deepseek.com) and model (ex: deepseek-chat), number of threads for concurrent calls and the size of the dataset.
 ```bash
-dataset_builder.py [-h] --api-endpoint API_ENDPOINT [--threads THREADS] [--examples EXAMPLES] --model MODEL
+python3 generate_questions.py
+python3 generate_examples.py
 ```
 
 Then, you should run this script as long as you have invalid examples as it will check if the JSON files are correctly structured.
