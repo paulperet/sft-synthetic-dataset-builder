@@ -13,6 +13,7 @@ pip install -r requirements
 Secondly, let's create two files:
 ```bash
 touch instruction_prompt.txt
+touch system_prompt.txt
 touch subjects.txt
 ```
 Example:
