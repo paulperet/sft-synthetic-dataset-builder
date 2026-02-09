@@ -60,11 +60,6 @@ python3 generate_questions.py
 python3 generate_examples.py
 ```
 
-Then, you should run this script as long as you have invalid examples as it will check if the JSON files are correctly structured.
-```bash
-dataset_repair.py [-h] [--api-endpoint API_ENDPOINT] [--threads THREADS] --model MODEL
-```
-
 Finally, when there are no incorrect files anymore you can publish your dataset to huggingface providing your repository (ex: john/mydataset)
 ```bash
 dataset_publish.py [-h] [--private PRIVATE] --hf-path HF_PATH
